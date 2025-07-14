@@ -5,10 +5,10 @@
 **Goal:**  
 Set up the hunt by defining what you're looking for.
 
-A new ransomware strain named **PwnCrypt** has been reported in the news. It leverages a **PowerShell-based payload** to encrypt files using **AES-256 encryption**. It specifically targets directories like `C:\Users\Public\Desktop`, renaming files to include the `.pwncrypt` marker (e.g., `hello.txt` becomes `hello.pwncrypt.txt`). The CISO suspects potential infection within the corporate network.
+A new ransomware strain named **PwnCrypt** has been reported in the news. It leverages a **PowerShell-based payload** to encrypt files using **AES-256 encryption**. It specifically targets directories like `C:\Users\Public\Desktop`, renaming files to include the `.pwncrypt` marker (e.g., `hello.txt` becomes `hello.pwncrypt.txt`). The CISO suspects a potential infection within the corporate network.
 
 **Hypothesis:**  
-Due to immature security posture and lack of user training, PwnCrypt may have infiltrated the environment. Begin hunting for files with the `.pwncrypt.` marker.
+Due to an immature security posture and a lack of user training, PwnCrypt may have infiltrated the environment. Begin hunting for files with the `.pwncrypt.` marker.
 
 **Indicators of Compromise (IOCs):**
 - `.pwncrypt` extension
@@ -29,14 +29,13 @@ Ensure logs are available in key Microsoft Defender tables:
 
 **KQL Used:**
 ```kql
-let VmName = "zero-day";
 DeviceFileEvents
-| where DeviceName == VmName
-| where FileName contains "pwncrypt"
+| where DeviceName == "nessa-windows"
+| where FileName has "pwncrypt"
 | project Timestamp, DeviceName, ActionType, FileName, FolderPath, InitiatingProcessFileName
+| order by Timestamp desc
 ```
-<img width="1051" alt="Screenshot 2025-05-14 at 5 29 45 PM" src="https://github.com/user-attachments/assets/93fa45b6-db07-45bd-9baa-e7a0471e7ed4" />
-
+<img width="1051" alt="Screenshot 2025-05-14 at 5 29 45 PM" src="https://github.com/user-attachments/assets/0c1cdcda-b155-4cd3-b55f-18d55b4a892c" />
 
 ---
 
