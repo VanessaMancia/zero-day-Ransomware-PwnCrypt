@@ -1,4 +1,4 @@
-# zero-day-Ransomware-PwnCrypt# 🎯 Threat Hunting Project: Detecting PwnCrypt Ransomware
+# 🎯 Threat Hunting Project: Detecting PwnCrypt Ransomware
 
 ## 1. 🧭 Preparation
 
