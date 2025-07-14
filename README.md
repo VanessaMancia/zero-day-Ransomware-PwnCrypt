@@ -61,15 +61,18 @@ DeviceFileEvents
 | where InitiatingProcessCommandLine contains "pwncrypt" or FolderPath contains "pwncrypt"
 | project Timestamp, DeviceName, ActionType, FileName, FolderPath, InitiatingProcessFileName, InitiatingProcessCommandLine
 ```
+<img width="1299" alt="Screenshot 2025-05-14 at 5 55 06 PM" src="https://github.com/user-attachments/assets/ac358078-808a-4938-917d-d4d8d0e8c37f" />
 
 ```kql
+let specifictime = datetime(2025-07-14T14:03:58.3686631Z);
 DeviceProcessEvents
-| where DeviceName == vmname
-| where Timestamp between ((Time - 5m) .. (Time + 5m))
+| where DeviceName == "nessa-windows"
+| where Timestamp between ((specifictime - 5m)..(specifictime + 5m ))
 | where InitiatingProcessCommandLine contains "pwncrypt" or FolderPath contains "pwncrypt"
+| project Timestamp, DeviceId, DeviceName, ActionType, FileName, InitiatingProcessCommandLine
 ```
 
-<img width="1299" alt="Screenshot 2025-05-14 at 5 55 06 PM" src="https://github.com/user-attachments/assets/ac358078-808a-4938-917d-d4d8d0e8c37f" />
+<img width="1299" alt="Screenshot 2025-05-14 at 5 55 06 PM" src="https://github.com/user-attachments/assets/529e697f-ef2e-4376-a02b-56189f1e4336" />
 
 ---
 
@@ -102,7 +105,7 @@ Mitigate any confirmed threats.
 
 #### ✅ Actions Taken:
 
-- **Isolated infected host** (`zero-day`) to prevent lateral movement.
+- **Isolated infected host** `nessa-windows`) to prevent lateral movement.
 - **Terminated malicious PowerShell process** running `pwncrypt.ps1`.
 - **Removed ransomware script** from `C:\ProgramData`.
 - **Searched the environment** for indicators of compromise (IOCs), such as `.pwncrypt` extensions and suspicious PowerShell usage.
