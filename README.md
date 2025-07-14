@@ -53,24 +53,23 @@ Analyze data to test the hypothesis and identify the attack vector.
 #### 📊 KQL Queries Used:
 
 ```kql
-let VmName = "zero-day";
-let Time = datetime(2025-05-14T21:35:19.267567Z);
-
+let VMName = "nessa-windows";
+let specifictime = datetime(2025-07-14T14:03:58.2787296Z);
 DeviceFileEvents
-| where DeviceName == VmName
-| where Timestamp between ((Time - 1m) .. (Time + 1m))
+| where DeviceName == vmname
+| where Timestamp between ((specifictime - 5m) . . (specifictime + 5m))
 | where InitiatingProcessCommandLine contains "pwncrypt" or FolderPath contains "pwncrypt"
 | project Timestamp, DeviceName, ActionType, FileName, FolderPath, InitiatingProcessFileName, InitiatingProcessCommandLine
 ```
 
 ```kql
 DeviceProcessEvents
-| where DeviceName == VmName
+| where DeviceName == vmname
 | where Timestamp between ((Time - 5m) .. (Time + 5m))
 | where InitiatingProcessCommandLine contains "pwncrypt" or FolderPath contains "pwncrypt"
 ```
 
-<img width="1299" alt="Screenshot 2025-05-14 at 5 55 06 PM" src="https://github.com/user-attachments/assets/f8808326-d361-4550-8faf-08bed3c7c090" />
+<img width="1299" alt="Screenshot 2025-05-14 at 5 55 06 PM" src="https://github.com/user-attachments/assets/ac358078-808a-4938-917d-d4d8d0e8c37f" />
 
 ---
 
